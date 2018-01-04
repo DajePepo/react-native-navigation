@@ -131,6 +131,18 @@
     {
       self.tabBar.clipsToBounds = [tabBarHideShadow boolValue] ? YES : NO;
     }
+    
+    NSString *tabBarTopBorder = tabsStyle[@"tabBarTopBorder"];
+    if (tabBarTopBorder)
+    {
+      NSString *tabBarTopBorderColor = tabsStyle[@"tabBarTopBorderColor"];
+      UIColor *color = tabBarTopBorderColor != (id)[NSNull null] ? [RCTConvert UIColor:tabBarTopBorderColor] : [UIColor blackColor];
+      
+      CALayer *topBorder = [CALayer layer];
+      topBorder.frame = CGRectMake(0.0f, 0.0f, self.tabBar.frame.size.width, 0.5f);
+      topBorder.backgroundColor = color.CGColor;
+      [self.tabBar.layer addSublayer:topBorder];
+    }
   }
   
   NSMutableArray *viewControllers = [NSMutableArray array];
